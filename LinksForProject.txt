@@ -1,0 +1,6 @@
+Main website used for reference:
+   https://chatbotslife.com/how-to-create-an-intelligent-chatbot-in-python-c655eb39d6b1
+   
+Reference: 
+   1. https://www.edureka.co/blog/how-to-make-a-chatbot-in-python/
+   2. https://towardsdatascience.com/build-your-first-chatbot-using-python-nltk-5d07b027e727
