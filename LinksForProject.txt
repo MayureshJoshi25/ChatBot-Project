@@ -4,3 +4,6 @@ Main website used for reference:
 Reference: 
    1. https://www.edureka.co/blog/how-to-make-a-chatbot-in-python/
    2. https://towardsdatascience.com/build-your-first-chatbot-using-python-nltk-5d07b027e727
+   
+Chatbot logic adapters:
+   https://chatterbot.readthedocs.io/en/stable/logic/
