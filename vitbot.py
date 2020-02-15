@@ -1,11 +1,12 @@
 #We need to import two classes for this purpose: ChatBot from chatterbot and ListTrainer from chatterbot.trainers:
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 #Our bot will be an instance of the class ChatBot:
 #You can provide read_only=True if you want to disable the bot’s ability to learn after the training (i.e. from actual conversations).
 #logic_adapters is the list of adapters used to train the bot.
-my_bot = ChatBot(name='PyBot', read_only=True,
+my_bot = ChatBot(name='PyBot', read_only=False,
                  logic_adapters=['chatterbot.logic.MathematicalEvaluation',
                                  'chatterbot.logic.BestMatch'])
 
@@ -39,15 +40,46 @@ small_talk = ['hi there!',
               'Vit was found in March 1980',
               'information on college?',
               'Very good college']
-math_talk_1 = ['pythagorean theorem',
-               'a squared plus b squared equals c squared.']
-math_talk_2 = ['law of cosines',
-               'c**2 = a**2 + b**2 - 2 * a * b * cos(gamma)']
+
+inst_talk = [
+                'History of Vit',
+                '''Vishwakarma Institute of Technology, Pune, '
+                   a highly commendable private institute, occupies a place of pride amongst the premier technical institutes of the western region of India. 
+                   Established in the year 1983, financed and run by the Bansilal Ramnath Agrawal Charitable Trust, Pune. 
+                   It is affiliated to the University of Pune . 
+                   Within three decades, the institute marched towards the pinnacle of glory through its remarkable achievements and laurels in the field of engineering education of high calibre. 
+                   According to Indian history, "Vishwakarma" is a divine architect-engineer. 
+                   It is believed that He fashioned this world with His rare engineering skills. 
+                   The Trust adopted this name with a vision to develop engineers of high calibre, 
+                   who could take up challenges of any type of engineering job and become successful in the chosen career.''',
+                'You dont teach me',
+                'Yes sir',   
+                'Address of vit',
+                '''Vishwakarma Institute of Technology666, 
+                   Upper Indiranagar, Bibwewadi,Pune, Maharashtra, INDIA - 411 037.''',
+                'Contact Details of vit',
+                'Contact Info : +91-20-2428 3001',
+                'Which courses are offered in Vit?',
+                '''Courses offered in vit are: 
+                   Undergrad BTech in chemical , computer , ENTC  , Industrial and Production,
+                  Instrumentation , IT , mechanical. 
+                  Postgrad courses : MCA and Mtech 
+                  Phd Programs.''',
+                'Fees for BTech courses',
+                'The fee for BTech courses is around 1,80,000',
+                'Placements in Vit',
+                '''In the past 9 years, around 111 companies have visited Vit every year
+                   The average salary package for the past eleven years is rs 4.59 lakhs pr annum'''
+                'I dont care',
+                'Ok'   
+                ]
 
 #We can create and train the bot by creating an instance of ListTrainer and supplying it with the lists of strings:
 list_trainer = ListTrainer(my_bot)
-for item in (small_talk, math_talk_1, math_talk_2):
+for item in (small_talk, inst_talk):
     list_trainer.train(item)
+trainer = ChatterBotCorpusTrainer(my_bot)
+trainer.train('chatterbot.corpus.english')    
 
 #You have to use get_response method to input things. Things inside the method are customizable.  
 print(my_bot.get_response(input("Hello,how can I help you?")))
