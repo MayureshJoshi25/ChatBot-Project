@@ -44,7 +44,7 @@ small_talk = ['hi there!',
 entity_placements = [
                         'placements',
                          '''In the past 9 years, around 111 companies have visited Vit every year,
-                            The average salary package for the past eleven years is rs 4.59 lakhs pr annum'''
+                            The average salary package for the past eleven years is rs 4.59 lakhs pr annum''',
 
                         'Address',
                         '''Vishwakarma Institute of Technology666, 
@@ -89,5 +89,5 @@ trainer.train('chatterbot.corpus.english.greetings')
 print(my_bot.get_response(input("Hello,how can I help you?")))
 for i in range(10):
    print(my_bot.get_response(input()))
-   print(i)
+   #print(i)
 #print(my_bot.get_response())
