@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request
 from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
 app = Flask(__name__)
-english_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
-trainer = ChatterBotCorpusTrainer(english_bot)
-trainer.train("chatterbot.corpus.english")
+vit_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter" , logic_adapters=['chatterbot.logic.BestMatch',
+                                 'chatterbot.logic.MathematicalEvaluation'])
  
 small_talk = ['hi there!',
               'hi!',
@@ -69,15 +69,24 @@ inst_talk = [
                 'What are the placements rates in Vit',
                 '''In the past 9 years, around 111 companies have visited Vit every year,
                   The average salary package for the past eleven years is rs 4.59 lakhs pr annum''',
-                'I dont care',
-                'Ok'   
-                ]
+            ]
+
+list_trainer = ListTrainer(vit_bot)
+
+for item in (small_talk,entity_placements,inst_talk):
+    list_trainer.train(item)
+
+trainer = ChatterBotCorpusTrainer(vit_bot)
+
+trainer.train("chatterbot.corpus.english.greetings")
+
+
 
 @app.route('/get',methods=['GET'])
 def get_bot_response():
     userText = request.args.get('msg')
     print("msg from user is : "+ userText)
-    return str(english_bot.get_response(userText))
+    return str(vit_bot.get_response(userText))
 
 @app.route("/")
 def home():
