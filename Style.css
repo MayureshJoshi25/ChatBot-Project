@@ -45,7 +45,7 @@ font-family: monospace;
 font-size: 17px;
 }
 .userText {
-color: white;
+color: rgb(0, 0, 0);
 font-family: monospace;
 font-size: 17px;
 text-align: right;
